@@ -21,7 +21,7 @@ import { doLicense } from "./license";
 async function checkFormat() {
     const prettierPromise = new Promise<boolean>((resolve) => {
         exec(
-            'yarn prettier -c "scripts/**/*.ts" "apps/**/*.ts"',
+            'yarn prettier -c "scripts/**/*.ts" "src/**/*.ts"',
             (error, stdout, stderr) => {
                 console.log(stdout);
                 console.log(stderr);
