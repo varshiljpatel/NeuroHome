@@ -1,4 +1,4 @@
-## Neuro Home
+# Neuro Home
 
 1 >\_ Create a `firebaseOptions.ts` file at `./src/lib/` folder.
 
