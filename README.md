@@ -4,9 +4,9 @@ A React Native Android app to remotely control your IoT-enabled devices. Turn yo
 
 ### Configure:
 
-1 >\_ Create a `firebaseOptions.ts` file at `./src/lib/` folder.
+1. Create a `firebaseOptions.ts` file at `./src/lib/` folder.
 
-2 >\_ Copy the code from `firebaseOptions.example.ts` to `firebaseOptions.ts` and enter your credential into blank spaces.
+2. Copy the code from `firebaseOptions.example.ts` to `firebaseOptions.ts` and enter your credential into blank spaces.
 
 ### Run the application on android:
 
