@@ -29,7 +29,10 @@ function MainTabs() {
                 },
                 tabBarActiveTintColor: "#0040ff",
                 headerShown: true,
-                headerStyle: { backgroundColor: "rgb(15,15,15)" },
+                headerStyle: {
+                    backgroundColor: "rgb(15,15,15)",
+                },
+                headerTitleAlign: "center",
                 headerTitle: () => <Logo />,
                 headerTintColor: "#fff",
                 tabBarInactiveTintColor: "#fff",

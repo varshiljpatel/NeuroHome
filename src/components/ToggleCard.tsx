@@ -38,6 +38,7 @@ const ToggleCard: React.FC<ToggleCardProps> = ({
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
+        if (!database) return;
         const deviceRef = ref(database, `devices/${title.toLowerCase()}`);
         onValue(deviceRef, (snapshot) => {
             if (snapshot.exists()) {

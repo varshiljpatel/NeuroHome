@@ -16,7 +16,7 @@
  */
 
 export const firebaseConfig = {
-    apiIKey: "",
+    apiKey: "",
     authDomain: "",
     databaseURL: "",
     projectId: "",
