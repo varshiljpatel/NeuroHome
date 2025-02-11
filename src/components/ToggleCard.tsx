@@ -16,7 +16,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { TouchableOpacity, StyleSheet, View, Alert } from "react-native";
 import { Text } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { ref, onValue, set } from "@react-native-firebase/database";
@@ -27,12 +27,14 @@ export interface ToggleCardProps {
     iconName: string;
     inactiveIconName?: string;
     title: string;
+    onRemove?: () => void;
 }
 
 const ToggleCard: React.FC<ToggleCardProps> = ({
     iconName,
     deviceID,
     title,
+    onRemove,
     inactiveIconName,
 }) => {
     const [isActive, setIsActive] = useState(false);
@@ -53,6 +55,25 @@ const ToggleCard: React.FC<ToggleCardProps> = ({
         set(ref(database, `state/${deviceID.toLowerCase()}`), newState);
     };
 
+    const confirmRemove = () => {
+        Alert.alert(
+            "Remove Device",
+            `Are you sure you want to remove ${title}?`,
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                },
+                {
+                    text: "Remove",
+                    style: "destructive",
+                    onPress: onRemove,
+                },
+            ],
+            { cancelable: true }
+        );
+    };
+
     return (
         <TouchableOpacity
             style={[
@@ -65,6 +86,15 @@ const ToggleCard: React.FC<ToggleCardProps> = ({
             onPress={handleClick}
             activeOpacity={0.7}
         >
+            {/* Remove button */}
+            <TouchableOpacity
+                onPress={confirmRemove}
+                style={styles.removeButton}
+            >
+                <MaterialCommunityIcons name="close" size={24} color="red" />
+            </TouchableOpacity>
+
+            {/* Main content */}
             <View style={styles.iconContainer}>
                 <MaterialCommunityIcons
                     name={isActive ? iconName : inactiveIconName || iconName}
@@ -87,6 +117,14 @@ const ToggleCard: React.FC<ToggleCardProps> = ({
 };
 
 const styles = StyleSheet.create({
+    removeButton: {
+        position: "absolute",
+        right: 8,
+        top: 8,
+        padding: 8,
+        backgroundColor: "rgba(255, 0, 0, 0.2)",
+        borderRadius: 999,
+    },
     toggleBG: {
         width: "100%",
         minHeight: 200,
