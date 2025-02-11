@@ -1,10 +1,14 @@
-## Neuro Home
+# Neuro Home
 
-1 >\_ Create a `firebaseOptions.ts` file at `./src/lib/` folder.
+A React Native Android app to remotely control your IoT-enabled devices. Turn your devices on/off with just a tap.
 
-2 >\_ Copy the code from `firebaseOptions.example.ts` to `firebaseOptions.ts` and enter your credential into blank spaces.
+### Configure:
 
-## Run the application on android
+1. Create a `firebaseOptions.ts` file at `./src/lib/` folder.
+
+2. Copy the code from `firebaseOptions.example.ts` to `firebaseOptions.ts` and enter your credential into blank spaces.
+
+### Run the application on android:
 
 ```
 npm run android
