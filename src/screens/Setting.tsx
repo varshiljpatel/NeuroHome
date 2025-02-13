@@ -17,11 +17,11 @@
 
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { removeData } from "../utils/login";
 
 const SettingsScreen: React.FC<any> = ({ navigation }) => {
     const handleLogout = async () => {
-        await AsyncStorage.removeItem("userToken");
+        await removeData();
         navigation.replace("LoginScreen");
     };
 

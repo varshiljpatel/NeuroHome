@@ -22,9 +22,14 @@ export interface StoreDataType {
     password: string;
 }
 
+const LOGIN_KEYNAME = "login";
+
 export const storeData = async (value: StoreDataType) => {
     try {
-        await AsyncStorage.setItem("login", JSON.stringify(value, null, 2));
+        await AsyncStorage.setItem(
+            LOGIN_KEYNAME,
+            JSON.stringify(value, null, 2)
+        );
     } catch (e) {
         throw new Error("Failed to store data" + " " + e);
     }
@@ -32,11 +37,15 @@ export const storeData = async (value: StoreDataType) => {
 
 export const getData = async () => {
     try {
-        const jsonValue = await AsyncStorage.getItem("login");
+        const jsonValue = await AsyncStorage.getItem(LOGIN_KEYNAME);
         return jsonValue != null
             ? (JSON.parse(jsonValue) as StoreDataType)
             : null;
     } catch (e) {
         throw new Error("Failed to get data" + " " + e);
     }
+};
+
+export const removeData = async () => {
+    await AsyncStorage.removeItem(LOGIN_KEYNAME);
 };

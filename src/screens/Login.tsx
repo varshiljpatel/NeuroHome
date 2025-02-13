@@ -26,11 +26,12 @@ import {
     ScrollView,
 } from "react-native";
 import { storeData } from "../utils/login";
+import Logo from "../components/Logo";
 
 const LoginScreen: React.FC<any> = ({ navigation }) => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
-    const [focusedInput, setFocusedInput] = useState<string | null>(null); // Track focused input
+    const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
     const handleLogin = async () => {
         if (name === "admin" && password === "password") {
@@ -47,9 +48,15 @@ const LoginScreen: React.FC<any> = ({ navigation }) => {
 
     return (
         <ScrollView
-            style={{ flex: 1, backgroundColor: "rgb(15,15,15)", padding: 16 }}
+            style={{
+                flex: 1,
+                backgroundColor: "hsl(0, 0.00%, 5.90%)",
+                padding: 16,
+            }}
+            keyboardShouldPersistTaps="handled"
         >
             <View style={styles.container}>
+                <Logo />
                 <Text style={styles.title}>Details?</Text>
                 <Text style={styles.text}>
                     Enter your details for setup. This is a one-time process,
@@ -102,7 +109,9 @@ const LoginScreen: React.FC<any> = ({ navigation }) => {
                     <Text
                         style={[
                             styles.buttonText,
-                            { color: name && password ? "#000" : "#888" },
+                            {
+                                color: name && password ? "#000" : "#888",
+                            },
                         ]}
                     >
                         Continue
@@ -124,6 +133,7 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 24,
         fontWeight: "600",
+        marginTop: 16,
     },
     text: {
         color: "#fff",

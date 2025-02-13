@@ -91,7 +91,11 @@ const ToggleCard: React.FC<ToggleCardProps> = ({
                 onPress={confirmRemove}
                 style={styles.removeButton}
             >
-                <MaterialCommunityIcons name="close" size={24} color="red" />
+                <MaterialCommunityIcons
+                    name="close"
+                    size={20}
+                    color="rgba(255,255,255,0.25)"
+                />
             </TouchableOpacity>
 
             {/* Main content */}
@@ -122,7 +126,6 @@ const styles = StyleSheet.create({
         right: 8,
         top: 8,
         padding: 8,
-        backgroundColor: "rgba(255, 0, 0, 0.2)",
         borderRadius: 999,
     },
     toggleBG: {

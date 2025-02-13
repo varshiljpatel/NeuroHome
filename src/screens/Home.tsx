@@ -31,6 +31,8 @@ import { Text } from "react-native-gesture-handler";
 import { getData, storeData } from "../utils/usage";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Logo from "../components/Logo";
+import { addDevice, getDevices, removeDevice } from "../utils/devices";
+import { get } from "node:https";
 
 function HomeScreen() {
     const [isUsageCardViewed, setIsUsageCardViewed] = React.useState<"0" | "1">(
@@ -40,58 +42,19 @@ function HomeScreen() {
     const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
     const [newDeviceName, setNewDeviceName] = React.useState<string>("");
 
-    (async () => {
-        const result = await getData();
-        if (result === "1") setIsUsageCardViewed("1");
-    })();
+    React.useEffect(() => {
+        (async () => {
+            const devices = await getDevices();
+            setDevices(devices);
+        })();
+    });
 
-    const removeDevice = (deviceID: string) => {
-        setDevices((prevDevices) =>
-            prevDevices.filter((device) => device.deviceID !== deviceID)
-        );
-    };
-
-    const addDevice = () => {
-        if (newDeviceName.trim() === "") return;
-
-        // Check if the device already exists
-        const deviceExists = devices.some(
-            (device) =>
-                device.title.toLowerCase() === newDeviceName.toLowerCase()
-        );
-
-        if (deviceExists) {
-            Alert.alert(
-                "Device Already Exists",
-                `A device with the name "${newDeviceName}" already exists.`,
-                [{ text: "OK" }],
-                { cancelable: true }
-            );
-            return;
-        }
-
-        const validIcons: Record<string, string> = {
-            tv: "television-classic",
-            light: "lightbulb-variant",
-            fan: "fan",
-            cube: "cube-outline",
-        };
-
-        const iconName =
-            validIcons[newDeviceName.toLowerCase().split(" ")[0]] ||
-            "cube-outline";
-
-        const newDevice: ToggleCardProps = {
-            deviceID: `${newDeviceName.toLowerCase()}:state`,
-            iconName: iconName,
-            inactiveIconName: iconName,
-            title: newDeviceName,
-        };
-
-        setDevices((prevDevices) => [...prevDevices, newDevice]);
-        setModalVisible(false);
-        setNewDeviceName("");
-    };
+    React.useEffect(() => {
+        (async () => {
+            const result = await getData();
+            if (result === "1") setIsUsageCardViewed("1");
+        })();
+    }, [isUsageCardViewed]);
 
     return (
         <View style={styles.container}>
@@ -165,6 +128,7 @@ function HomeScreen() {
                                 <TouchableWithoutFeedback
                                     onPress={async () => {
                                         await storeData({ viewed: "1" });
+                                        setIsUsageCardViewed("1");
                                     }}
                                 >
                                     <Text style={styles.textGotit}>Got it</Text>
@@ -231,7 +195,14 @@ function HomeScreen() {
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                onPress={addDevice}
+                                onPress={() =>
+                                    addDevice({
+                                        newDeviceName,
+                                    }).then((value: boolean) => {
+                                        setModalVisible(!value);
+                                        if (value) setNewDeviceName("");
+                                    })
+                                }
                                 style={styles.addButton}
                             >
                                 <Text style={styles.addButtonText}>Add</Text>
@@ -278,12 +249,13 @@ const styles = StyleSheet.create({
         paddingVertical: 32,
         borderRadius: 30,
         gap: 8,
-        marginBottom: 24,
+        marginBottom: 16,
         backgroundColor: "rgb(25,25,25)",
     },
     contentContainer: {
         flex: 1,
         padding: 16,
+        paddingTop: 0,
         backgroundColor: "rgb(15,15,15)",
         alignItems: "flex-start",
         justifyContent: "flex-start",
