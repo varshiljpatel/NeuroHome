@@ -95,7 +95,7 @@ function HomeScreen() {
                             paddingHorizontal: 32,
                             justifyContent: "center",
                             alignItems: "center",
-                            borderColor: "#0040ff",
+                            borderColor: "#003fff",
                             borderWidth: 1,
                         }}
                         onPress={() => setModalVisible(true)}
@@ -104,7 +104,7 @@ function HomeScreen() {
                             style={{
                                 fontSize: 16,
                                 fontWeight: "medium",
-                                color: "#0040ff",
+                                color: "#003fff",
                             }}
                         >
                             Add Device
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#0040ff",
+        backgroundColor: "#003fff",
         paddingHorizontal: 24,
     },
     floatingButtonText: {
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
         marginLeft: 8,
     },
     textGotit: {
-        color: "#0040ff",
+        color: "#003fff",
         fontSize: 16,
         fontWeight: "500",
         marginTop: 16,
@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     addButton: {
-        backgroundColor: "#0040ff",
+        backgroundColor: "#003fff",
         height: 60,
         paddingHorizontal: 64,
         alignItems: "center",

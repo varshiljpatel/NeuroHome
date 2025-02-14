@@ -21,6 +21,7 @@ import Logo from "./Logo";
 import SettingsScreen from "../screens/Setting";
 import HomeScreen from "../screens/Home";
 import exp from "constants";
+import TalkScreen from "../screens/Talk";
 
 const MainTabs: React.FC = () => {
     const Tab = createBottomTabNavigator();
@@ -29,16 +30,20 @@ const MainTabs: React.FC = () => {
         <Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
-                    let iconName = route.name === "Home" ? "home" : "cog";
+                    const iconName = {
+                        Home: "home",
+                        Talk: "microphone",
+                        Settings: "cog",
+                    };
                     return (
                         <MaterialCommunityIcons
-                            name={iconName}
+                            name={iconName[route.name as keyof typeof iconName]}
                             size={size}
                             color={color}
                         />
                     );
                 },
-                tabBarActiveTintColor: "#0040ff",
+                tabBarActiveTintColor: "#003fff",
                 headerShown: true,
                 headerStyle: {
                     backgroundColor: "rgb(15,15,15)",
@@ -60,6 +65,7 @@ const MainTabs: React.FC = () => {
             })}
         >
             <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Talk" component={TalkScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
     );

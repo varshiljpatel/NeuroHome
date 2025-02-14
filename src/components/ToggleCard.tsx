@@ -79,7 +79,7 @@ const ToggleCard: React.FC<ToggleCardProps> = ({
             style={[
                 styles.toggleBG,
                 {
-                    borderColor: isActive ? "#0040ff" : "#404040",
+                    borderColor: isActive ? "#003fff" : "#404040",
                     backgroundColor: isActive ? "rgb(25,25,25)" : "transparent",
                 },
             ]}
